@@ -1,0 +1,2 @@
+--import ./b.txt
+This is a text file named "a.txt"
