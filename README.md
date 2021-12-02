@@ -13,3 +13,6 @@ Use the following to test out your results:
 
 `node .`
 
+## Feel stuck?
+
+Just look at the `solutions` branch.
