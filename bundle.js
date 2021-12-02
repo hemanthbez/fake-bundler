@@ -6,6 +6,7 @@ const path = require("path");
 /**
  *
  * @param {string} content
+ * @returns
  */
 function parseForImport(content) {
   const lines = content.split(/\r?\n/);
@@ -25,6 +26,25 @@ function parseForImport(content) {
  * @returns string
  */
 module.exports = function bundle(entry, src) {
-  // TODO: write a iterative graph traversal "bundler" here
-  return "the result";
+  let result = [];
+  let visited = new Set();
+  let stack = [entry];
+
+  while (stack.length > 0) {
+    const mod = stack.pop();
+
+    if (!visited.has(mod)) {
+      visited.add(mod);
+      const content = fs.readFileSync(path.join(src, mod), "utf-8");
+      const { imports, parsed } = parseForImport(content);
+
+      result.unshift(parsed);
+
+      for (const imported of imports) {
+        stack.push(imported);
+      }
+    }
+  }
+
+  return result.join('\n');
 }
