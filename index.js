@@ -4,6 +4,8 @@ const bundle = require("./bundle");
 
 const result = bundle("./a.txt", path.join(__dirname, "src"));
 
+// console.log("result --> " + result);
+
 if (
   result ===
   `This is a text file named "c.txt"
